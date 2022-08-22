@@ -1,0 +1,45 @@
+bubble_sort//冒泡排序，只能进行整数的排序
+qsort//可用于所有排序
+//qsort(arr,sz,sizeof(arr[0]),cmp)
+//参数一：待排序数组的首元素地址
+//参数二：待排序数组的元素个数吧
+//参数三：待排序数组的每个元素的大小
+//参数四：是函数指针，比较两个元素的方法和所用函数地址，这个函数使用者自己实现
+//        函数指针的参数是：带比较的两个元素的地址；
+
+
+               //void* 可以接收所有类型的参数，但不能直接加减（需要强制转换）
+void bubble_sort(void* base,int sz,int width,int (*cmp)(void*e1,void*e2))
+{                                                  把比较函数调出来
+
+
+int i=0;
+	for(i=0;i<sz-1;i++)
+	{
+		int j=0;
+		for(j=0;j<sz-1-i;j++)
+		{
+        //比较大小
+			if(cmp((char*)base+j*width,(char*)base+(j+1)*width)>0)  
+			{
+				//交换
+				Swap((char*)base+j*width,(char*)base+(j+1)*width,width);
+			}
+		}
+	}
+}
+
+
+void Swap(char* buf1,char* buf2,int width)
+{
+	int i=0;
+	for(i=0;i<width;i++)
+	{
+		int tmp=*buf1;
+		*buf1=*buf2;
+		*buf2=tmp;
+		buf1++;
+		buf2++;
+	}
+  
+  cmp(void* e1,void* e2)   //比较方法
